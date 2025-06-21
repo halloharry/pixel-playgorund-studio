@@ -1,522 +1,175 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="id">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8"/>-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
-<!--    <title>Form Pendaftaran Lomba 17an</title>-->
-<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">-->
-<!--    <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">-->
-
-<!--    <style>-->
-<!--        body {-->
-<!--          font-family: 'Fredoka', sans-serif;-->
-<!--          background: linear-gradient(to bottom right, #fff3f3, #ffecec);-->
-<!--          min-height: 100vh;-->
-<!--          display: flex;-->
-<!--          flex-direction: column;-->
-<!--        }-->
-<!--        header {-->
-<!--          background: linear-gradient(to right, red, white);-->
-<!--          padding: 1rem;-->
-<!--          text-align: center;-->
-<!--          color: white;-->
-<!--          font-weight: bold;-->
-<!--          font-size: 1.5rem;-->
-<!--        }-->
-<!--        footer {-->
-<!--          background-color: #dc3545;-->
-<!--          color: white;-->
-<!--          text-align: center;-->
-<!--          padding: 0.8rem;-->
-<!--          margin-top: auto;-->
-<!--        }-->
-<!--        .card {-->
-<!--          border-left: 10px solid red;-->
-<!--        }-->
-<!--        .independence-banner {-->
-<!--          background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Flag-map_of_Indonesia.svg/1280px-Flag-map_of_Indonesia.svg.png') no-repeat center right;-->
-<!--          background-size: 100px;-->
-<!--          padding-right: 120px;-->
-<!--        }-->
-<!--        @keyframes shake {-->
-<!--          0% { transform: translateX(0); }-->
-<!--          25% { transform: translateX(-10px); }-->
-<!--          50% { transform: translateX(10px); }-->
-<!--          75% { transform: translateX(-10px); }-->
-<!--          100% { transform: translateX(0); }-->
-<!--        }-->
-<!--        .shake {-->
-<!--          animation: shake 0.1s ease-in-out;-->
-<!--        }-->
-
-<!--    </style>-->
-
-<!--    <script>-->
-<!--        if (localStorage.getItem("loggedIn") !== "true") {-->
-<!--          document.addEventListener("DOMContentLoaded", function () {-->
-<!--            document.body.innerHTML = `-->
-<!--              <div class="container mt-5">-->
-<!--                <div class="card p-4 shadow-lg mx-auto" style="max-width: 400px;">-->
-<!--                  <h2 class="mb-4 text-center text-danger">Login Panitia</h2>-->
-<!--                  <form id="loginForm">-->
-<!--                    <div class="mb-3">-->
-<!--                      <label>Username</label>-->
-<!--                      <input type="text" class="form-control" id="username" required />-->
-<!--                    </div>-->
-<!--                    <div class="mb-3">-->
-<!--                      <label>Password</label>-->
-<!--                      <input type="password" class="form-control" id="password" required />-->
-<!--                    </div>-->
-<!--                    <button class="btn btn-danger w-100">Login</button>-->
-<!--                  </form>-->
-<!--                  <div id="loginError" class="text-danger text-center mt-3 d-none">Username atau password salah!</div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            `;-->
-
-<!--            document.getElementById("loginForm").addEventListener("submit", function (e) {-->
-<!--              e.preventDefault();-->
-<!--              const user = document.getElementById("username").value;-->
-<!--              const pass = document.getElementById("password").value;-->
-<!--              if (user === "admin" && pass === "P@ssw0rd") {-->
-<!--                localStorage.setItem("loggedIn", "true");-->
-<!--                location.reload();-->
-<!--              } else {-->
-<!--                document.getElementById("loginError").classList.remove("d-none");-->
-<!--              }-->
-<!--            });-->
-<!--          });-->
-<!--        }-->
-<!--    </script>-->
-<!--</head>-->
-
-<!--<body>-->
-<!--<header style="background-image: url('https://fahum.umsu.ac.id/info/wp-content/uploads/2023/08/kemerdekaan-indonesia-upaya-dan-faktor-pendukungnya.jpg'); background-size: cover; background-position: center; color: white; padding: 3rem; text-align: center"-->
-<!--        class="d-flex justify-content-center align-items-center gap-3 p-3 bg-light border-bottom">-->
-<!--    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg" height="40" alt="11">-->
-<!--    <h1 class="m-0 fs-2 text-white fw-bold">Pendaftaran Lomba 17 Agustus Antar RT</h1>-->
-<!--    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg" height="40" alt="11">-->
-<!--</header>-->
-
-<!--<div class="container my-5">-->
-
-<!--    <div class="d-flex justify-content-end mb-3">-->
-<!--        <button class="btn btn-outline-primary me-2" onclick="tampilkanForm()">📝 Formulir</button>-->
-<!--        <button class="btn btn-outline-success me-2" onclick="tampilkanPeserta()">📋 Lihat Peserta</button>-->
-<!--        <button class="btn btn-warning me-2" onclick="tampilkanUndian()">🎲 Undian Dorprize</button>-->
-<!--    </div>-->
-
-
-<!--    <div id="halamanForm" class="card shadow-lg rounded-4 p-4 independence-banner">-->
-<!--        <h2 class="mb-4 text-center text-danger">Formulir Pendaftaran</h2>-->
-<!--        <form id="lombaForm">-->
-<!--            <div class="mb-3">-->
-<!--                <label class="form-label">Nama Lengkap</label>-->
-<!--                <input type="text" name="entry.2094351097" class="form-control" required>-->
-<!--            </div>-->
-
-<!--            <div class="mb-3">-->
-<!--                <label class="form-label">Usia</label>-->
-<!--                <input type="number" name="entry.107278371" class="form-control" required min="1" max="99"-->
-<!--                       oninput="this.value = this.value.slice(0, 2)">-->
-<!--            </div>-->
-
-<!--            <div class="mb-3">-->
-<!--                <label class="form-label">RT</label>-->
-<!--                <select name="entry.453818273" class="form-select" required>-->
-<!--                    <option value="">&#45;&#45; Pilih RT &#45;&#45;</option>-->
-<!--                    <option value="RT 01">RT 01</option>-->
-<!--                    <option value="RT 02">RT 02</option>-->
-<!--                    <option value="RT 03">RT 03</option>-->
-<!--                    <option value="RT 04">RT 04</option>-->
-<!--                    <option value="RT 05">RT 05</option>-->
-<!--                </select>-->
-<!--            </div>-->
-
-<!--            <div class="mb-3">-->
-<!--                <label class="form-label">Lomba yang Diikuti</label>-->
-<!--                <select name="entry.727121773" class="form-select" required>-->
-<!--                    <option value="">&#45;&#45; Pilih Lomba &#45;&#45;</option>-->
-<!--                    <option value="Balap Karung">Balap Karung</option>-->
-<!--                    <option value="Makan Kerupuk">Makan Kerupuk</option>-->
-<!--                    <option value="Tarik Tambang">Tarik Tambang</option>-->
-<!--                    <option value="Kelereng">Kelereng</option>-->
-<!--                    <option value="Lomba Karaoke">Lomba Karaoke</option>-->
-<!--                    <option value="Tidak Ikut Serta">Tidak Ikut Serta</option>-->
-<!--                </select>-->
-<!--            </div>-->
-
-<!--            <div class="mb-3">-->
-<!--                <label class="form-label">No HP (Opsional)</label>-->
-<!--                <input type="text" name="entry.1311942718"-->
-<!--                       class="form-control" pattern="^\d{10,14}$"-->
-<!--                       minlength="10"-->
-<!--                       maxlength="14"-->
-<!--                       placeholder="Contoh: 081234567890"-->
-<!--                       oninput="this.value = this.value.replace(/[^0-9]/g, '')"-->
-<!--                       inputmode="numeric"-->
-<!--                >-->
-<!--            </div>-->
-
-<!--            <button type="submit" class="btn btn-danger w-100 fw-bold">Kirim Pendaftaran</button>-->
-<!--        </form>-->
-
-<!--        <div id="pesanBerhasil" class="alert alert-success mt-4 d-none text-center fw-bold">-->
-<!--            🎉 Terima kasih sudah mendaftar! Sampai jumpa di hari H !-->
-<!--            <br>-->
-<!--            <a id="whatsappLink" href="#" class="btn btn-success mt-3" target="_blank">Konfirmasi via WhatsApp</a>-->
-<!--        </div>-->
-
-<!--        <div class="text-end mt-4">-->
-<!--            <button class="btn btn-outline-danger btn-sm" onclick="logout()">Logout</button>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    <div id="halamanPeserta" class="card shadow rounded-4 p-4 d-none">-->
-<!--        <h3 class="text-danger text-center mb-4">👥 Daftar Peserta Terdaftar</h3>-->
-<!--        <h5 class="text-danger mb-3">Total Peserta Terdaftar: <span id="totalPeserta">...</span></h5>-->
-
-<!--        &lt;!&ndash;        sorting &ndash;&gt;-->
-<!--        <div class="mb-3">-->
-<!--            <label for="searchNama" class="form-label">Cari Nama</label>-->
-<!--            <input type="text" id="searchNama" class="form-control" placeholder="Masukkan nama peserta...">-->
-<!--        </div>-->
-
-<!--        <div class="row mb-3">-->
-<!--            <div class="col-md-4">-->
-<!--                <label>Filter Usia:</label>-->
-<!--                <select id="filterUsia" class="form-select">-->
-<!--                    <option value="">Semua</option>-->
-<!--                    <option value="2-4">2–4 tahun</option>-->
-<!--                    <option value="5-7">5–7 tahun</option>-->
-<!--                    <option value="8-12">8–12 tahun</option>-->
-<!--                    <option value="13-17">13–17 tahun</option>-->
-<!--                </select>-->
-<!--            </div>-->
-<!--            <div class="col-md-4">-->
-<!--                <label>Filter RT:</label>-->
-<!--                <select id="filterRT" class="form-select">-->
-<!--                    <option value="">Semua</option>-->
-<!--                    <option value="RT 01">RT 01</option>-->
-<!--                    <option value="RT 02">RT 02</option>-->
-<!--                    <option value="RT 03">RT 03</option>-->
-<!--                    <option value="RT 04">RT 04</option>-->
-<!--                    <option value="RT 05">RT 05</option>-->
-<!--                </select>-->
-<!--            </div>-->
-<!--            <div class="col-md-4">-->
-<!--                <label>Filter Lomba:</label>-->
-<!--                <select id="filterLomba" class="form-select">-->
-<!--                    <option value="">Semua</option>-->
-<!--                    <option value="Balap Karung">Balap Karung</option>-->
-<!--                    <option value="Makan Kerupuk">Makan Kerupuk</option>-->
-<!--                    <option value="Tarik Tambang">Tarik Tambang</option>-->
-<!--                    <option value="Kelereng">Kelereng</option>-->
-<!--                    <option value="Lomba Karaoke">Lomba Karaoke</option>-->
-<!--                    <option value="Tidak Ikut Serta">Tidak Ikut Serta</option>-->
-<!--                    &lt;!&ndash; Tambah jenis lainnya &ndash;&gt;-->
-<!--                </select>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="table-responsive">-->
-<!--            <table class="table table-striped table-bordered" id="tabelPeserta">-->
-<!--                <thead class="table-danger">-->
-<!--                <tr>-->
-<!--                    <th>No</th>-->
-<!--                    <th>Nama</th>-->
-<!--                    <th>Usia</th>-->
-<!--                    <th>RT</th>-->
-<!--                    <th>Lomba</th>-->
-<!--                    <th>No HP</th>-->
-<!--                </tr>-->
-<!--                </thead>-->
-<!--                <tbody></tbody>-->
-<!--            </table>-->
-<!--        </div>-->
-<!--        <div class="d-flex justify-content-between align-items-center mt-3">-->
-<!--            <button class="btn btn-outline-secondary btn-sm" id="prevBtn">⏮ Prev</button>-->
-<!--            <span id="pageInfo" class="fw-bold"></span>-->
-<!--            <button class="btn btn-outline-secondary btn-sm" id="nextBtn">Next ⏭</button>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    <div id="halamanUndian" class="d-none">-->
-<!--        <div class="container mt-5 text-center">-->
-<!--            <h2>🎁 Undian Doorprize</h2>-->
-<!--            <p class="text-muted">Klik tombol di bawah ini untuk mengacak nama pemenang dari seluruh peserta yang sudah-->
-<!--                mendaftar.</p>-->
-
-<!--            <button class="btn btn-success btn-lg" onclick="acakPemenang()">🎲 Acak Pemenang</button>-->
-
-<!--            <div id="undianBox" class="mt-5">-->
-<!--                <h1 id="undianNama" class="fw-bold display-4">-&#45;&#45;</h1>-->
-<!--                <p id="pemenangFix" class="text-success fs-4 mt-3"></p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--&lt;!&ndash;    VALIDASI UNDIAN MENU&ndash;&gt;-->
-<!--    &lt;!&ndash; Modal Password Superadmin &ndash;&gt;-->
-<!--    <div class="modal fade" id="modalSuperadmin" tabindex="-1" aria-labelledby="modalSuperadminLabel" aria-hidden="true">-->
-<!--        <div class="modal-dialog modal-dialog-centered">-->
-<!--            <div class="modal-content border-danger">-->
-<!--                <div class="modal-header bg-danger text-white">-->
-<!--                    <h5 class="modal-title" id="modalSuperadminLabel">Akses Terbatas</h5>-->
-<!--                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>-->
-<!--                </div>-->
-<!--                <div class="modal-body">-->
-<!--                    <p>Masukkan password superadmin untuk melanjutkan ke fitur undian doorprize.</p>-->
-<!--                    <input type="password" id="inputPasswordSuperadmin" class="form-control mb-2" placeholder="Password Superadmin">-->
-<!--                    <div id="passwordError" class="text-danger d-none">⚠️ Password salah!</div>-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>-->
-<!--                    <button class="btn btn-danger" onclick="konfirmasiSuperadmin()">Lanjut</button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--</div>-->
-
-<!--<footer class="d-flex justify-content-center align-items-center gap-3 p-3 bg-danger text-white mt-5 rounded-3 shadow-sm">-->
-<!--    <span>&copy; 2025 Pixel Playground Studio</span>-->
-<!--    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg" alt="Bendera Indonesia"-->
-<!--         height="30">-->
-<!--</footer>-->
-
-<!--&lt;!&ndash;FORM DAN LIST PESERTA&ndash;&gt;-->
-<!--<script>-->
-<!--    document.getElementById("lombaForm")?.addEventListener("submit", function (e) {-->
-<!--      e.preventDefault();-->
-<!--      const form = e.target;-->
-<!--      const data = new FormData(form);-->
-
-<!--      fetch("https://docs.google.com/forms/d/e/1FAIpQLSf6MGzYONvg79OXFz6GzdpjXaLcvsG_Ybi2shUU_gENKahROQ/formResponse", {-->
-<!--        method: "POST",-->
-<!--        mode: "no-cors",-->
-<!--        body: data-->
-<!--      }).then(() => {-->
-<!--        form.classList.add("d-none");-->
-<!--        document.getElementById("pesanBerhasil").classList.remove("d-none");-->
-
-<!--        const nama = data.get("entry.2094351097"); // Nama-->
-<!--        const lomba = data.get("entry.727121773"); // Lomba-->
-<!--        const noHp = data.get("entry.1311942718"); // No HP-->
-
-<!--        if (noHp) {-->
-<!--            const nomorWa = noHp.replace(/^0/, '62'); // Ubah 08xx → 62xx-->
-<!--            const pesan = `Halo ${nama}, kamu telah terdaftar dalam lomba ${lomba}. Sampai jumpa di acara 17an ya!`;-->
-<!--            const waLink = `https://wa.me/${nomorWa}?text=${encodeURIComponent(pesan)}`;-->
-<!--            document.getElementById("whatsappLink").href = waLink;-->
-<!--            document.getElementById("whatsappLink").classList.remove("d-none");-->
-<!--        } else {-->
-<!--            document.getElementById("whatsappLink").classList.add("d-none");-->
-<!--        }-->
-
-<!--      }).catch(() => {-->
-<!--        alert("Gagal mengirim. Coba lagi!");-->
-<!--      });-->
-<!--    });-->
-
-<!--    function logout() {-->
-<!--      localStorage.removeItem("loggedIn");-->
-<!--      location.reload();-->
-<!--    }-->
-
-<!--    function tampilkanForm() {-->
-<!--    document.getElementById("halamanForm").classList.remove("d-none");-->
-<!--    document.getElementById("halamanPeserta").classList.add("d-none");-->
-<!--      document.getElementById("halamanUndian").classList.add("d-none");-->
-
-<!--  }-->
-
-<!--    let pesertaData = []; // Global-->
-<!--    let currentPage = 1;-->
-<!--    const perPage = 20;-->
-<!--  function tampilkanPeserta() {-->
-<!--  document.getElementById("halamanForm").classList.add("d-none");-->
-<!--  document.getElementById("halamanPeserta").classList.remove("d-none");-->
-<!--    document.getElementById("halamanUndian").classList.add("d-none");-->
-
-
-<!--  if (pesertaData.length === 0) {-->
-<!--    fetch("https://opensheet.elk.sh/19abpxwNFZCchAeGz8Hl2l3JQ4Hn6APU4IppksIGP59s/Form+Responses+1") // Ganti sesuai Sheet ID kamu-->
-<!--      .then(res => res.json())-->
-<!--      .then(data => {-->
-<!--        pesertaData = data;-->
-<!--        renderPage();-->
-<!--      });-->
-<!--  } else {-->
-<!--    renderPage();-->
-<!--  }-->
-
-<!--  function renderPage() {-->
-<!--  const tbody = document.querySelector("#tabelPeserta tbody");-->
-<!--  tbody.innerHTML = "";-->
-
-<!--  const usiaFilter = document.getElementById("filterUsia").value;-->
-<!--  const rtFilter = document.getElementById("filterRT").value;-->
-<!--  const lombaFilter = document.getElementById("filterLomba").value;-->
-<!--  const searchNama = document.getElementById("searchNama").value.toLowerCase(); // baru-->
-
-<!--  document.getElementById("totalPeserta").innerText = pesertaData.length;-->
-
-<!--  // Filter peserta sesuai kriteria-->
-<!--  const filtered = pesertaData.filter((row) => {-->
-<!--    const usia = parseInt(row["Usia"]);-->
-<!--    const rt = row["RT"];-->
-<!--    const lomba = row["Lomba yang diikuti"];-->
-<!--    const nama = row["Nama lengkap"]?.toLowerCase() || "";-->
-
-<!--      // Filter nama-->
-<!--    const namaValid = nama.includes(searchNama);-->
-
-<!--    // Cek usia-->
-<!--    let usiaValid = true;-->
-<!--    if (usiaFilter === "2-4") usiaValid = usia >= 2 && usia <= 4;-->
-<!--    if (usiaFilter === "5-7") usiaValid = usia >= 5 && usia <= 7;-->
-<!--    if (usiaFilter === "8-12") usiaValid = usia >= 8 && usia <= 12;-->
-<!--    if (usiaFilter === "13-17") usiaValid = usia >= 13 && usia <= 17;-->
-
-<!--    const rtValid = rtFilter === "" || rt === rtFilter;-->
-<!--    const lombaValid = lombaFilter === "" || lomba === lombaFilter;-->
-
-<!--    return usiaValid && rtValid && lombaValid && namaValid;-->
-<!--  });-->
-
-<!--  const totalPages = Math.ceil(filtered.length / perPage);-->
-<!--  const start = (currentPage - 1) * perPage;-->
-<!--  const end = start + perPage;-->
-<!--  const pageData = filtered.slice(start, end);-->
-
-<!--  pageData.forEach((row, i) => {-->
-<!--    const tr = document.createElement("tr");-->
-<!--    tr.innerHTML = `-->
-<!--      <td>${start + i + 1}</td>-->
-<!--      <td>${row["Nama lengkap"] || "-"}</td>-->
-<!--      <td>${row["Usia"] || "-"}</td>-->
-<!--      <td>${row["RT"] || "-"}</td>-->
-<!--      <td>${row["Lomba yang diikuti"] || "-"}</td>-->
-<!--      <td>${row["Nomor telepon"] || "-"}</td>-->
-<!--    `;-->
-<!--    tbody.appendChild(tr);-->
-<!--  });-->
-<!--  document.getElementById("totalPeserta").innerText = filtered.length;-->
-<!--  document.getElementById("pageInfo").innerText = `Halaman ${currentPage} dari ${totalPages}`;-->
-<!--  document.getElementById("prevBtn").disabled = currentPage === 1;-->
-<!--  document.getElementById("nextBtn").disabled = currentPage === totalPages;-->
-<!--}-->
-
-<!--    // Event listener filter-->
-<!--    ["filterUsia", "filterRT", "filterLomba"].forEach(id => {-->
-<!--      document.getElementById(id).addEventListener("change", () => {-->
-<!--        currentPage = 1; // reset ke halaman pertama-->
-<!--        renderPage();-->
-<!--      });-->
-<!--    });-->
-
-<!--    document.getElementById("prevBtn").addEventListener("click", () => {-->
-<!--      if (currentPage > 1) {-->
-<!--        currentPage&#45;&#45;;-->
-<!--        renderPage();-->
-<!--      }-->
-<!--    });-->
-<!--    document.getElementById("nextBtn").addEventListener("click", () => {-->
-<!--      const totalPages = Math.ceil(pesertaData.length / perPage);-->
-<!--      if (currentPage < totalPages) {-->
-<!--        currentPage++;-->
-<!--        renderPage();-->
-<!--      }-->
-<!--    });-->
-
-<!--    document.getElementById("searchNama").addEventListener("input", () => {-->
-<!--      currentPage = 1;-->
-<!--      renderPage();-->
-<!--    });-->
-
-<!--  }-->
-<!--</script>-->
-
-<!--&lt;!&ndash;TAMPILAN UNDIAN&ndash;&gt;-->
-<!--<script>-->
-<!--    function tampilkanUndian() {-->
-<!--      const passwordInput = document.getElementById("inputPasswordSuperadmin");-->
-<!--      const errorMsg = document.getElementById("passwordError");-->
-<!--      passwordInput.value = "";-->
-<!--      errorMsg.classList.add("d-none");-->
-
-<!--      const modal = new bootstrap.Modal(document.getElementById('modalSuperadmin'));-->
-<!--      modal.show();-->
-<!--    }-->
-
-<!--    function konfirmasiSuperadmin() {-->
-<!--      const password = document.getElementById("inputPasswordSuperadmin").value;-->
-<!--      const errorMsg = document.getElementById("passwordError");-->
-
-<!--      if (password === "12345") {-->
-<!--        const modalElement = document.getElementById('modalSuperadmin');-->
-<!--        const modal = bootstrap.Modal.getInstance(modalElement);-->
-<!--        modal.hide();-->
-
-<!--        document.getElementById("halamanForm").classList.add("d-none");-->
-<!--        document.getElementById("halamanPeserta").classList.add("d-none");-->
-<!--        document.getElementById("halamanUndian").classList.remove("d-none");-->
-
-<!--        if (pesertaData.length === 0) {-->
-<!--          fetch("https://opensheet.elk.sh/19abpxwNFZCchAeGz8Hl2l3JQ4Hn6APU4IppksIGP59s/Form+Responses+1")-->
-<!--            .then(res => res.json())-->
-<!--            .then(data => {-->
-<!--              pesertaData = data;-->
-<!--            });-->
-<!--        }-->
-<!--      } else {-->
-<!--        errorMsg.classList.remove("d-none");-->
-<!--      }-->
-<!--    }-->
-
-<!--    function acakPemenang() {-->
-<!--      const display = document.getElementById("undianNama");-->
-<!--      const hasil = document.getElementById("pemenangFix");-->
-
-<!--      if (!display || !hasil) {-->
-<!--        alert("Elemen undian tidak ditemukan di halaman!");-->
-<!--        return;-->
-<!--      }-->
-
-<!--      const namaPeserta = pesertaData-->
-<!--        .map(row => row["Nama lengkap"])-->
-<!--        .filter(n => n && n.trim() !== "");-->
-
-<!--      if (namaPeserta.length === 0) {-->
-<!--        display.innerText = "-&#45;&#45;";-->
-<!--        hasil.innerText = "Belum ada peserta terdaftar!";-->
-<!--        return;-->
-<!--      }-->
-
-<!--      hasil.innerText = "";-->
-<!--      let i = 0;-->
-<!--      const maxIterasi = 30;-->
-
-<!--      const interval = setInterval(() => {-->
-<!--        const random = Math.floor(Math.random() * namaPeserta.length);-->
-<!--        display.innerText = namaPeserta[random];-->
-<!--        display.classList.add("shake");-->
-
-<!--        setTimeout(() => display.classList.remove("shake"), 80);-->
-<!--        i++;-->
-<!--        if (i >= maxIterasi) {-->
-<!--          clearInterval(interval);-->
-<!--          const winner = namaPeserta[Math.floor(Math.random() * namaPeserta.length)];-->
-<!--          display.innerText = winner;-->
-<!--          hasil.innerHTML = `🎉 Selamat kepada <strong>${winner}</strong> sebagai pemenang doorprize!`;-->
-<!--        }-->
-<!--      }, 100);-->
-<!--    }-->
-<!--</script>-->
-
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>-->
-<!--</body>-->
-
-<!--</html>-->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>PIXEL PLAYGROUND STUDIO SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/main.css"/>
+</head>
+
+<body>
+<header class="main-header">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg" height="40" alt="11">
+    <h1 class="m-0 fs-2 text-white fw-bold">PIXEL PLAYGROUND STUDIO SYSTEM</h1>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg" height="40" alt="11">
+</header>
+
+
+<div class="container my-5">
+    <div class="d-flex justify-content-end mb-3">
+        <button class="btn btn-outline-primary me-2" onclick="tampilkanForm()">📝 Penjualan</button>
+        <button class="btn btn-outline-success me-2" onclick="tampilkanPeserta()">📋 Lihat Peserta</button>
+        <button class="btn btn-warning me-2" onclick="tampilkanUndian()">🎲 Undian Dorprize</button>
+    </div>
+
+    <!-- FORM, PESERTA, UNDIAN -->
+    <div id="halamanForm" class="card shadow-lg rounded-4 p-4 independence-banner d-none">
+        <h2 class="mb-4 text-center text-danger"></h2>
+        <form id="penjualanForm">
+            <div class="mb-3">
+                <label class="form-label">Nama Lengkap</label>
+                <input type="text" name="entry.1506002396" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Nomor Handphone</label>
+                <input type="number" name="entry.1099356212" class="form-control" pattern="^\\d{10,14}$"
+                       minlength="10" maxlength="14"
+                       placeholder="Contoh: 081234567890"
+                       oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                       inputmode="numeric" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Jenis Layanan</label>
+                <select name="entry.1099535243" id="jenisLayanan" class="form-select" required>
+                    <option value="">-- Pilih Jenis Layanan --</option>
+                    <!-- Isi dinamis dari Google Sheet -->
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Harga</label>
+                <input type="text" name="entry.1500269990" id="hargaLayanan" class="form-control" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Jumlah</label>
+                <input type="number" name="entry.1126059801" id="jumlahLayanan" class="form-control" min="1" max="999"
+                       placeholder="Masukkan jumlah" oninput="this.value = this.value.slice(0, 3)">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Total Bayar</label>
+                <input type="text" name="entry.1893531017" id="totalBayar" class="form-control" readonly>
+            </div>
+
+            <button type="submit" class="btn btn-danger w-100 fw-bold">Submit Pembayaran</button>
+        </form>
+
+        <div id="pesanBerhasil" class="alert alert-success mt-4 d-none text-center fw-bold">
+            🎉 Terima kasih sudah mendaftar! Sampai jumpa di hari H !
+            <br>
+            <a id="whatsappLink" href="#" class="btn btn-success mt-3" target="_blank">Konfirmasi via WhatsApp</a>
+        </div>
+        <div class="text-end mt-4">
+            <button class="btn btn-outline-danger btn-sm" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div id="halamanPeserta" class="card shadow rounded-4 p-4 d-none">
+        <h2 class="text-center text-danger mb-3">Daftar Peserta</h2>
+        <!-- Filter -->
+        <div class="row mb-3">
+            <div class="row g-2">
+                <div class="col">
+                    <label>Mulai Tanggal</label>
+                    <input type="date" id="startDate" class="form-control">
+                </div>
+                <div class="col">
+                    <label>Sampai Tanggal</label>
+                    <input type="date" id="endDate" class="form-control">
+                </div>
+                <div class="col">
+                    <label>Jenis Layanan</label>
+                    <select id="filterJenisLayanan" class="form-select">
+                        <option value="">-- Semua --</option>
+                        <option value="">-- Semua --</option>
+                        <option value="Foto Keluarga">Foto Keluarga</option>
+                        <option value="Prewedding">Prewedding</option>
+                        <option value="Foto Produk">Foto Produk</option>
+                        <option value="Red Room">Red Room</option>
+                        <option value="Couple Self Photo Limbo">Couple Self Photo Limbo</option>
+                        <option value="Group Self Photo Limbo">Group Self Photo Limbo</option>
+                        <option value="Extra person">Extra person</option>
+                        <option value="Extra Minute">Extra Minute</option>
+                        <option value="Extra Print">Extra Print</option>
+                        <option value="Pas Photo + Print">Pas Photo + Print</option>
+                        <option value="Pas Photo(file only)">Pas Photo(file only)</option>
+                        <option value="Bundling Couple(Red room + Limbo)">Bundling Couple(Red room + Limbo)</option>
+                        <option value="Solo Portrait (Self Photo)">Solo Portrait (Self Photo)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Cari Nama</label>
+                <input type="text" id="searchNama" class="form-control" placeholder="Cari nama...">
+            </div>
+
+            <div class="d-flex align-items-center mb-3">
+                <button id="clearFilterBtn" class="btn btn-secondary btn-sm" style="margin-top: 8px;">Clear Filter</button>
+            </div>
+        </div>
+
+        <!-- Tabel Peserta -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="tabelPeserta">
+                <thead class="table-dark">
+                <tr>
+                    <th>No</th>
+                    <th>Timestamp</th>
+                    <th>Nama Lengkap</th>
+                    <th>Nomor Handphone</th>
+                    <th>Jenis Layanan</th>
+                    <th>Harga</th>
+                    <th>Jumlah</th>
+                    <th>Total Bayar</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <!-- Info Total & Navigasi -->
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <div>Total Peserta: <span id="totalPeserta">0</span></div>
+            <div>
+                <button class="btn btn-outline-secondary btn-sm" id="prevBtn">Sebelumnya</button>
+                <span id="pageInfo" class="mx-2">Halaman 1</span>
+                <button class="btn btn-outline-secondary btn-sm" id="nextBtn">Berikutnya</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="halamanUndian" class="d-none"></div>
+</div>
+
+<footer class="footer-main">
+    <span>&copy; 2025 Pixel Playground Studio</span>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg" alt="Bendera Indonesia"
+         height="30">
+</footer>
+
+<!-- MODAL -->
+<div id="modalSuperadminContainer"></div>
+
+<!-- SCRIPTS -->
+<script src="script/login.js"></script>
+<script src="script/form.js"></script>
+<script src="script/peserta.js"></script>
+<script src="script/layanan.js"></script>
+<script src="script/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
