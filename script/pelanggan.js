@@ -66,11 +66,11 @@ function renderPage() {
       <td>${row["Harga"] || "-"}</td>
       <td>${row["Jumlah"] || "-"}</td>
       <td>${row["Total Bayar"] || "-"}</td>
+      <td>${row["Semua Layanan"] || "-"}</td>
     `;
     tbody.appendChild(tr);
   });
 
-  document.getElementById("totalPeserta").innerText = filtered.length;
   document.getElementById("pageInfo").innerText = `Halaman ${currentPage} dari ${totalPages}`;
   document.getElementById("prevBtn").disabled = currentPage === 1;
   document.getElementById("nextBtn").disabled = currentPage === totalPages;

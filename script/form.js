@@ -1,6 +1,12 @@
 
 document.getElementById("penjualanForm")?.addEventListener("submit", function (e) {
   e.preventDefault();
+
+ if (!validasiLayanan()) {
+    alert("Pastikan semua jenis layanan, harga, dan jumlah telah diisi dengan benar.");
+    return;
+  }
+
   const form = e.target;
   const data = new FormData(form);
 
@@ -32,3 +38,22 @@ Telah berkunjung ke Pixel Playground Studio, semoga hasil foto ${jenisLayanan} s
     alert("Gagal mengirim. Coba lagi!");
   });
 });
+
+function validasiLayanan() {
+  const semuaRow = document.querySelectorAll("#layananContainer .row");
+  let valid = true;
+
+  for (const row of semuaRow) {
+    const select = row.querySelector(".layananSelect");
+    const harga = row.querySelector(".hargaInput").value.replace(/\D/g, '');
+    const jumlah = parseInt(row.querySelector(".jumlahInput").value);
+
+    if (!select.value || !harga || !jumlah || jumlah <= 0) {
+      valid = false;
+      break;
+    }
+  }
+
+  return valid;
+}
+

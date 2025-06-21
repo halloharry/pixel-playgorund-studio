@@ -20,11 +20,10 @@
 <div class="container my-5">
     <div class="d-flex justify-content-end mb-3">
         <button class="btn btn-outline-primary me-2" onclick="tampilkanForm()">📝 Penjualan</button>
-        <button class="btn btn-outline-success me-2" onclick="tampilkanPeserta()">📋 Lihat Peserta</button>
-        <button class="btn btn-warning me-2" onclick="tampilkanUndian()">🎲 Undian Dorprize</button>
+        <button class="btn btn-outline-success me-2" onclick="tampilkanPeserta()">📋 Lihat Daftar Penjualan</button>
+        <button class="btn btn-warning me-2" onclick="tampilkanUndian()"> DashBoard</button>
     </div>
 
-    <!-- FORM, PESERTA, UNDIAN -->
     <div id="halamanForm" class="card shadow-lg rounded-4 p-4 independence-banner d-none">
         <h2 class="mb-4 text-center text-danger"></h2>
         <form id="penjualanForm">
@@ -40,25 +39,12 @@
                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                        inputmode="numeric" required>
             </div>
-            <div class="mb-3">
-                <label class="form-label">Jenis Layanan</label>
-                <select name="entry.1099535243" id="jenisLayanan" class="form-select" required>
-                    <option value="">-- Pilih Jenis Layanan --</option>
-                    <!-- Isi dinamis dari Google Sheet -->
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Harga</label>
-                <input type="text" name="entry.1500269990" id="hargaLayanan" class="form-control" readonly>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Jumlah</label>
-                <input type="number" name="entry.1126059801" id="jumlahLayanan" class="form-control" min="1" max="999"
-                       placeholder="Masukkan jumlah" oninput="this.value = this.value.slice(0, 3)">
-            </div>
-
+            <div id="layananContainer" class="mb-3"></div>
+            <button type="button" class="btn btn-sm btn-outline-primary mb-3" onclick="tambahLayanan()">+ Tambah Layanan</button>
+            <input type="hidden" name="entry.10482276" id="semuaLayanan">
+            <input type="hidden" name="entry.1099535243" class="hiddenJenisLayanan">
+            <input type="hidden" name="entry.1500269990" class="hiddenHarga">
+            <input type="hidden" name="entry.1126059801" class="hiddenJumlah">
             <div class="mb-3">
                 <label class="form-label">Total Bayar</label>
                 <input type="text" name="entry.1893531017" id="totalBayar" class="form-control" readonly>
@@ -94,10 +80,6 @@
                     <label>Jenis Layanan</label>
                     <select id="filterJenisLayanan" class="form-select">
                         <option value="">-- Semua --</option>
-                        <option value="">-- Semua --</option>
-                        <option value="Foto Keluarga">Foto Keluarga</option>
-                        <option value="Prewedding">Prewedding</option>
-                        <option value="Foto Produk">Foto Produk</option>
                         <option value="Red Room">Red Room</option>
                         <option value="Couple Self Photo Limbo">Couple Self Photo Limbo</option>
                         <option value="Group Self Photo Limbo">Group Self Photo Limbo</option>
@@ -135,6 +117,7 @@
                     <th>Harga</th>
                     <th>Jumlah</th>
                     <th>Total Bayar</th>
+                    <th>Detail Layanan</th>
                 </tr>
                 </thead>
                 <tbody></tbody>
@@ -143,7 +126,6 @@
 
         <!-- Info Total & Navigasi -->
         <div class="d-flex justify-content-between align-items-center mt-3">
-            <div>Total Peserta: <span id="totalPeserta">0</span></div>
             <div>
                 <button class="btn btn-outline-secondary btn-sm" id="prevBtn">Sebelumnya</button>
                 <span id="pageInfo" class="mx-2">Halaman 1</span>
@@ -167,7 +149,7 @@
 <!-- SCRIPTS -->
 <script src="script/login.js"></script>
 <script src="script/form.js"></script>
-<script src="script/peserta.js"></script>
+<script src="script/pelanggan.js"></script>
 <script src="script/layanan.js"></script>
 <script src="script/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
