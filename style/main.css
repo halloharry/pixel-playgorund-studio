@@ -38,3 +38,24 @@ footer.footer-main {
 .shake {
   animation: shake 0.1s ease-in-out;
 }
+
+.navbar-danger {
+    background-color: #d60000 !important; /* Merah khas kemerdekaan */
+}
+
+.navbar-toggler {
+    border: none;
+    outline: none;
+}
+
+.navbar-nav .nav-link {
+    color: white !important;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+}

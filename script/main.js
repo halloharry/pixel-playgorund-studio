@@ -1,26 +1,37 @@
+window.onload = function () {
+  tampilkanDashboard(); // Dashboard jadi tampilan awal
+};
+
+
 function tampilkanForm() {
   document.getElementById("halamanForm").classList.remove("d-none");
   document.getElementById("halamanPeserta").classList.add("d-none");
-  document.getElementById("halamanUndian").classList.add("d-none");
-}
-
-function tampilkanUndian() {
-  const passwordInput = document.getElementById("inputPasswordSuperadmin");
-  const errorMsg = document.getElementById("passwordError");
-  passwordInput.value = "";
-  errorMsg.classList.add("d-none");
-
-  const modal = new bootstrap.Modal(document.getElementById('modalSuperadmin'));
-  modal.show();
+  document.getElementById("halamanDashboard").classList.add("d-none");
 }
 
 function logout() {
   localStorage.removeItem("loggedIn");
   location.reload();
 }
+
+function sembunyikanSemuaHalaman() {
+    const halaman = [
+        "halamanForm",
+        "halamanPeserta",
+        "halamanDashboard"
+    ];
+
+    halaman.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add("d-none");
+    });
+}
+
 function tampilkanDashboard() {
-  document.getElementById("halamanDashboard").classList.remove("d-none");
-  document.getElementById("halamanForm").classList.add("d-none");
-  document.getElementById("halamanPeserta").classList.add("d-none");
-  document.getElementById("halamanUndian").classList.add("d-none");
+    sembunyikanSemuaHalaman();
+    document.getElementById("halamanDashboard").classList.remove("d-none");
+
+    ambilDataPeserta().then(data => {
+        renderDashboard(data);
+    });
 }

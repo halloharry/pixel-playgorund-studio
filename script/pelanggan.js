@@ -2,10 +2,10 @@ let pesertaData = [];
 let currentPage = 1;
 const perPage = 20;
 
-function tampilkanPeserta() {
+function tampilkanPenjualan() {
   document.getElementById("halamanForm").classList.add("d-none");
   document.getElementById("halamanPeserta").classList.remove("d-none");
-  document.getElementById("halamanUndian").classList.add("d-none");
+  document.getElementById("halamanDashboard").classList.add("d-none");
 
   if (pesertaData.length === 0) {
     fetch("https://opensheet.elk.sh/12DEvhJzjYNELbGgXFrpvfS490HbG63mQ17amXGC-dGs/Form+Responses+1")

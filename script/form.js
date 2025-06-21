@@ -57,3 +57,26 @@ function validasiLayanan() {
   return valid;
 }
 
+function isiFormBaru() {
+    // Sembunyikan pesan berhasil
+    document.getElementById("pesanBerhasil").classList.add("d-none");
+
+    // Tampilkan kembali form penjualan (INI BAGIAN PENTING YANG KURANG)
+    document.getElementById("penjualanForm").classList.remove("d-none");
+
+    // Tampilkan kembali halaman form & sembunyikan halaman lain
+    document.getElementById("halamanForm").classList.remove("d-none");
+    document.getElementById("halamanPeserta").classList.add("d-none");
+    document.getElementById("halamanDashboard").classList.add("d-none");
+
+    // Reset form
+    document.getElementById("penjualanForm").reset();
+
+    // Kosongkan layanan & total
+    document.getElementById("layananContainer").innerHTML = "";
+    document.getElementById("totalBayar").value = "Rp 0";
+    document.getElementById("semuaLayanan").value = "";
+
+    // Scroll ke atas form
+    document.getElementById("halamanForm").scrollIntoView({ behavior: "smooth" });
+}
