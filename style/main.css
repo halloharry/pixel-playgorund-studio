@@ -1,0 +1,40 @@
+body {
+  font-family: 'Fredoka', sans-serif;
+  background: linear-gradient(to bottom right, #fff3f3, #ffecec);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main-header {
+  background-image: url('https://fahum.umsu.ac.id/info/wp-content/uploads/2023/08/kemerdekaan-indonesia-upaya-dan-faktor-pendukungnya.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 3rem;
+  text-align: center;
+}
+footer.footer-main {
+  background-color: #dc3545;
+  color: white;
+  text-align: center;
+  padding: 0.8rem;
+  margin-top: auto;
+}
+.card {
+  border-left: 10px solid red;
+}
+.independence-banner {
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Flag-map_of_Indonesia.svg/1280px-Flag-map_of_Indonesia.svg.png') no-repeat center right;
+  background-size: 100px;
+  padding-right: 120px;
+}
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
+}
+.shake {
+  animation: shake 0.1s ease-in-out;
+}
