@@ -167,6 +167,9 @@ function renderDashboard(data, startDate = null, endDate = null) {
       }
     }
   });
+
+    kirimNotifikasiWhatsapp(data);
+
 }
 
 document.getElementById("filterStartDate").addEventListener("change", applyFilter);
