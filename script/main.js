@@ -32,6 +32,7 @@ function tampilkanDashboard() {
     document.getElementById("halamanDashboard").classList.remove("d-none");
 
     ambilDataPeserta().then(data => {
-        renderDashboard(data);
+        penjualanData = data;               // ✅ SIMPAN DATA KE GLOBAL
+        renderDashboard(penjualanData);     // Render awal
     });
 }

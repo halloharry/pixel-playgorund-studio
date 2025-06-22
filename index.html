@@ -42,18 +42,43 @@
         </div>
     </nav>
 
+    <!-- FILTER TANGGAL -->
+    <div class="row mb-4 justify-content-center">
+        <div class="col-md-3">
+            <label>Mulai Tanggal</label>
+            <input type="date" id="filterStartDate" class="form-control">
+        </div>
+        <div class="col-md-3">
+            <label>Sampai Tanggal</label>
+            <input type="date" id="filterEndDate" class="form-control">
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+            <button id="btnClearFilter" class="btn btn-secondary w-100">🔄 Clear Filter</button>
+        </div>
+    </div>
+
+
     <div id="halamanDashboard" class="d-none card shadow rounded-4 p-4">
         <h2 class="text-center text-danger mb-4">📊 Dashboard Penjualan</h2>
 
-        <div class="row">
-            <div class="col-md-8 mb-4">
-                <canvas id="chartOmsetHarian" height="200"></canvas>
-            </div>
-            <div class="col-md-4">
-                <canvas id="chartProdukTerlaris" height="200"></canvas>
-            </div>
+        <!-- Grafik Penjualan Harian -->
+        <div class="mb-5">
+            <h4 class="text-center fw-bold mb-3">
+                Omset Harian (<span id="bulanOmset">Bulan Ini</span>)
+            </h4>
+            <canvas id="chartOmsetHarian" height="250"></canvas>
         </div>
 
+        <!-- Grafik Pie Produk Terlaris -->
+        <div class="mb-5">
+            <h4 class="text-center fw-bold mb-3">
+                Layanan Terlaris (<span id="bulanTerlaris">Bulan Ini</span>)
+            </h4>            <div class="d-flex justify-content-center">
+                <div style="max-width: 400px; width: 100%;">
+                    <canvas id="chartProdukTerlaris" height="300"></canvas>
+                </div>
+            </div>
+        </div>
 
         <div class="mt-4 text-center">
             <h4>Total Omset Bulan Ini: <span id="totalOmset" class="text-success fw-bold">Rp 0</span></h4>
