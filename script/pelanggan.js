@@ -6,6 +6,7 @@ function tampilkanPenjualan() {
   document.getElementById("halamanForm").classList.add("d-none");
   document.getElementById("halamanPeserta").classList.remove("d-none");
   document.getElementById("halamanDashboard").classList.add("d-none");
+  document.getElementById('bookingCalendar').classList.add('d-none');
 
   if (pesertaData.length === 0) {
     fetch("https://opensheet.elk.sh/12DEvhJzjYNELbGgXFrpvfS490HbG63mQ17amXGC-dGs/Form+Responses+1")
@@ -115,7 +116,6 @@ document.getElementById("clearFilterBtn").addEventListener("click", () => {
 
 function parseTanggalGoogleForm(timestamp) {
   if (!timestamp) return null;
-        console.log(timestamp)
   const parts = timestamp.split(" ")[0].split("/"); // ambil bagian tanggal dari "13/06/2025 10:30:00"
   let hari = parts[0].padStart(2, '0');
   let bulan = parts[1].padStart(2, '0');

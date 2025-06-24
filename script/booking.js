@@ -96,6 +96,9 @@ function sembunyikanSemuaHalaman() {
 function tampilkanBooking() {
   sembunyikanSemuaHalaman();
   document.getElementById("bookingCalendar").classList.remove("d-none");
+  document.getElementById("halamanForm").classList.remove("d-none");
+  document.getElementById("halamanPeserta").classList.add("d-none");
+  document.getElementById("halamanDashboard").classList.add("d-none");
   tampilkanBookingAktif();
 }
 
@@ -111,3 +114,31 @@ function formatTanggalIndonesia(date) {
     timeZone: "Asia/Jakarta"
   }) + " WIB";
 }
+
+function toggleNominalDp() {
+  const status = document.getElementById("bookingStatus").value;
+  const dpContainer = document.getElementById("nominalDpContainer");
+  if (status === "DP") {
+    dpContainer.classList.remove("d-none");
+  } else {
+    dpContainer.classList.add("d-none");
+    document.getElementById("bookingNominalDp").value = "";
+  }
+}
+
+document.getElementById("bookingForm")?.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData(form);
+
+  fetch("https://docs.google.com/forms/d/e/1FAIpQLSfGNt07BLxsSXn7TvK83nDiU12ux6HRXuSIhrZFSCv_PzIlTw/formResponse", {
+    method: "POST",
+    mode: "no-cors",
+    body: data
+  }).then(() => {
+    form.reset();
+    document.getElementById("bookingSukses").classList.remove("d-none");
+  }).catch(() => {
+    alert("❌ Gagal mengirim. Coba lagi!");
+  });
+});

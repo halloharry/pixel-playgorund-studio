@@ -7,6 +7,8 @@ function tampilkanForm() {
   document.getElementById("halamanForm").classList.remove("d-none");
   document.getElementById("halamanPeserta").classList.add("d-none");
   document.getElementById("halamanDashboard").classList.add("d-none");
+  document.getElementById('bookingCalendar').classList.add('d-none');
+
 }
 
 function logout() {
@@ -18,7 +20,8 @@ function sembunyikanSemuaHalaman() {
     const halaman = [
         "halamanForm",
         "halamanPeserta",
-        "halamanDashboard"
+        "halamanDashboard",
+        "bookingCalendar"
     ];
 
     halaman.forEach(id => {
