@@ -1,12 +1,3 @@
-// whatsapp-notifier.js
-
-/**
- * Fitur: Kirim notifikasi omset harian via WhatsApp
- * Cara kerja:
- * - Hitung omset hari ini
- * - Jika omset ada, generate pesan dan link WhatsApp
- * - Tampilkan tombol "Kirim Notifikasi WA" jika omset > 0
- */
 
 function getHariIniTanggalString() {
   const now = new Date();
@@ -51,8 +42,3 @@ function kirimNotifikasiWhatsapp(pesertaData, nomorTujuanList = ["628970377680",
     }
   }
 }
-
-
-// Panggil fungsi ini setelah pesertaData berhasil diambil di dashboard.js
-// Contoh:
-// kirimNotifikasiWhatsapp(pesertaData);

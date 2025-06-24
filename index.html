@@ -18,6 +18,8 @@
 
 
 <div class="container my-5">
+
+<!--    NAVBAR DISINI -->
     <nav class="navbar navbar-expand-lg navbar-danger bg-danger rounded-4 shadow px-3 mb-4">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold text-white" href="#">📊 Menu</a>
@@ -30,6 +32,9 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <button class="nav-link btn btn-link text-white" onclick="tampilkanDashboard()">🏠 Dashboard</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link btn btn-link text-white" onclick="tampilkanBooking()">📅 Booking Jadwal</button>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link btn btn-link text-white" onclick="tampilkanForm()">📝 Penjualan</button>
@@ -57,7 +62,7 @@
         </div>
     </div>
 
-
+<!--DASHBOARD DISINI-->
     <div id="halamanDashboard" class="d-none card shadow rounded-4 p-4">
         <h2 class="text-center text-danger mb-4">📊 Dashboard Penjualan</h2>
 
@@ -87,6 +92,90 @@
         <div id="waNotificationContainer" class="text-center mt-4"></div>
     </div>
 
+<!--    HALAMAN BOOKING / CALENDAR DISINI-->
+    <div id="bookingCalendar" class="d-none card shadow rounded-4 p-4">
+        <h2 class="text-center text-danger mb-4">📅 Booking Jadwal Studio</h2>
+        <form id="bookingForm">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label>Nama Lengkap</label>
+                    <input type="text" name="entry.1259718892" id="bookingNama" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label>Nomor Handphone</label>
+                    <input type="tel" id="bookingHp" name="entry.404564143" class="form-control" required
+                           inputmode="numeric" pattern="^[0-9]{10,14}$"
+                           placeholder="Contoh: 081234567890"
+                           oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label>Jenis Layanan</label>
+                    <select id="bookingLayanan" name="entry.923354867" class="form-select" required>
+                        <option value="">-- Pilih Layanan --</option>
+                        <option value="Red Room">Red Room</option>
+                        <option value="Couple Self Photo Limbo">Couple Self Photo Limbo</option>
+                        <option value="Group Self Photo Limbo">Group Self Photo Limbo</option>
+                        <option value="Extra person">Extra person</option>
+                        <option value="Extra Minute">Extra Minute</option>
+                        <option value="Extra Print">Extra Print</option>
+                        <option value="Pas Photo + Print">Pas Photo + Print</option>
+                        <option value="Pas Photo(file only)">Pas Photo(file only)</option>
+                        <option value="Bundling Couple(Red room + Limbo)">Bundling Couple(Red room + Limbo)</option>
+                        <option value="Solo Portrait (Self Photo)">Solo Portrait (Self Photo)</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label>Tanggal Booking</label>
+                    <input type="date" name="entry.153877126" id="bookingTanggal" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <label>Jam Mulai</label>
+                    <input type="time" name="entry.994136534" id="bookingJamMulai" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label>Jam Selesai</label>
+                    <input type="time" name="entry.997813174" id="bookingJamSelesai" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <label>Status Pembayaran</label>
+                    <select id="bookingStatus" name="entry.1687534756" class="form-select" required onchange="toggleNominalDp()">
+                        <option value="">-- Pilih Status --</option>
+                        <option value="Lunas">Lunas</option>
+                        <option value="DP">DP</option>
+                    </select>
+                </div>
+                <div class="col-md-3 d-none" id="nominalDpContainer">
+                    <label>Nominal DP</label>
+                    <input type="number" name="entry.238451296" id="bookingNominalDp" class="form-control" placeholder="Contoh: 50000">
+                </div>
+                <div class="col-md-3">
+                    <label>Catatan Tambahan</label>
+                    <input type="text" name="entry.1757443244" id="bookingCatatan" class="form-control" placeholder="Opsional...">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-danger w-100 fw-bold mt-3">Simpan Booking</button>
+        </form>
+        <div id="bookingSukses" class="alert alert-success mt-4 d-none text-center fw-bold">
+            ✅ Booking berhasil disimpan!
+        </div>
+        <hr class="my-4">
+
+        <h4 class="text-center text-secondary mb-2">📋 Daftar Booking</h4>
+        <div id="bookingList"></div>
+    </div>
+<!--    UPDATE STATUS LIST BOOKING -->
+    <form id="formUpdateStatus" class="d-none">
+        <input type="hidden" name="entry.996756838" value="Selesai">
+    </form>
+
+    <!--    HALAMAN FORM DISINI-->
     <div id="halamanForm" class="card shadow-lg rounded-4 p-4 independence-banner d-none">
         <h2 class="mb-4 text-center text-danger"></h2>
         <form id="penjualanForm">
@@ -128,9 +217,10 @@
         </div>
     </div>
 
+<!--    LIST DATA PENJUALAN DISINI-->
     <div id="halamanPeserta" class="card shadow rounded-4 p-4 d-none">
         <h2 class="text-center text-danger mb-3">Daftar Peserta</h2>
-        <!-- Filter -->
+        <!-- Filter PENJUALAN -->
         <div class="row mb-3">
             <div class="row g-2">
                 <div class="col">
@@ -216,9 +306,11 @@
 <script src="script/pelanggan.js"></script>
 <script src="script/layanan.js"></script>
 <script src="script/dashboard.js"></script>
+<script src="script/booking.js"></script>
 <script src="script/whatsapp-notif.js"></script>
 <script src="script/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/main.min.js"></script>
 </body>
 </html>
