@@ -1,33 +1,118 @@
+:root {
+  --color-background: #f4f4dc;
+  --color-primary: #fa7d00;
+  --color-secondary: #fe9800;
+  --color-dark: #2e2e2e;
+  --color-light: #ffffff;
+}
+
 body {
   font-family: 'Fredoka', sans-serif;
-  background: linear-gradient(to bottom right, #fff3f3, #ffecec);
+  background-color: var(--color-background);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  color: var(--color-dark);
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .main-header {
-  background-image: url('https://fahum.umsu.ac.id/info/wp-content/uploads/2023/08/kemerdekaan-indonesia-upaya-dan-faktor-pendukungnya.jpg');
-  background-size: cover;
+  background-image: url('../asset/pixelplay.png');
+  background-size: contain;         /* ✅ Gambar tidak dipotong */
+  background-repeat: no-repeat;
   background-position: center;
-  color: white;
-  padding: 3rem;
+  padding: 6rem 1rem 3rem;          /* ✅ Padding atas disesuaikan */
+  padding-top: 8rem; /* Atau bahkan 6rem */
   text-align: center;
+  color: var(--color-primary);
 }
+
 footer.footer-main {
-  background-color: #dc3545;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-light);
   text-align: center;
   padding: 0.8rem;
   margin-top: auto;
 }
+
 .card {
-  border-left: 10px solid red;
+  border-left: 10px solid var(--color-primary);
+  background-color: var(--color-light);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
+
 .independence-banner {
   background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Flag-map_of_Indonesia.svg/1280px-Flag-map_of_Indonesia.svg.png') no-repeat center right;
   background-size: 100px;
   padding-right: 120px;
 }
+
+.navbar-danger {
+  background-color: var(--color-primary) !important;
+}
+
+.navbar-toggler {
+  border: none;
+  outline: none;
+}
+
+.navbar-nav .nav-link {
+  color: var(--color-light) !important;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+}
+
+/* Dropdown menu khusus user / logout */
+.navbar-nav .dropdown-menu {
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 0.75rem;
+  min-width: 140px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-nav .dropdown-menu .dropdown-item {
+  color: var(--color-light);
+  font-weight: bold;
+  padding: 0.6rem 1rem;
+  transition: background-color 0.3s;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-light);
+  border-radius: 0.75rem;
+}
+
+/* Dropdown toggle icon (👤 Admin) */
+.navbar-nav .dropdown-toggle {
+  font-weight: bold;
+  color: var(--color-light) !important;
+}
+
+
+/* Tambahan Optional */
+.btn-danger {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-danger:hover {
+  background-color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+/* Efek goyang */
 @keyframes shake {
   0% { transform: translateX(0); }
   25% { transform: translateX(-10px); }
@@ -39,23 +124,10 @@ footer.footer-main {
   animation: shake 0.1s ease-in-out;
 }
 
-.navbar-danger {
-    background-color: #d60000 !important; /* Merah khas kemerdekaan */
-}
-
-.navbar-toggler {
-    border: none;
-    outline: none;
-}
-
-.navbar-nav .nav-link {
-    color: white !important;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    transition: background-color 0.3s;
-}
-
-.navbar-nav .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 0.5rem;
+/* Responsive tweak khusus mobile */
+@media (max-width: 768px) {
+  .main-header {
+    background-size: 90%;           /* ✅ Gambar lebih kecil di layar kecil */
+    padding-top: 6rem;
+  }
 }

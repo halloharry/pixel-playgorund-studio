@@ -11,9 +11,7 @@
 
 <body>
 <header class="main-header">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg" height="40" alt="11">
-    <h1 class="m-0 fs-2 text-white fw-bold">PIXEL PLAYGROUND STUDIO SYSTEM</h1>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg" height="40" alt="11">
+    <h1 class="m-0 fs-2 text-white fw-bold">  </h1>
 </header>
 
 
@@ -41,6 +39,14 @@
                     </li>
                     <li class="nav-item">
                         <button class="nav-link btn btn-link text-white" onclick="tampilkanPenjualan()">📋 Daftar Penjualan</button>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white fw-bold" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            👤 Admin
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><button class="dropdown-item" onclick="logout()">🔒 Logout</button></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -174,6 +180,8 @@
         <h4 class="text-center text-secondary mb-2">📋 Daftar Booking</h4>
         <div id="bookingList"></div>
     </div>
+
+
 <!--    UPDATE STATUS LIST BOOKING -->
     <form id="formUpdateStatus" class="d-none">
         <input type="hidden" name="entry.996756838" value="Selesai">
@@ -205,19 +213,16 @@
                 <label class="form-label">Total Bayar</label>
                 <input type="text" name="entry.1893531017" id="totalBayar" class="form-control" readonly>
             </div>
-
             <button type="submit" class="btn btn-danger w-100 fw-bold">Submit Pembayaran</button>
         </form>
-
 
         <div id="pesanBerhasil" class="alert alert-success mt-4 d-none text-center fw-bold">
             🎉 Terima kasih sudah mendaftar! Sampai jumpa di hari H !
             <br>
             <a id="whatsappLink" href="#" class="btn btn-success mt-3" target="_blank">Konfirmasi via WhatsApp</a>
-        </div>
-        <div class="text-end mt-4">
-            <button class="btn btn-outline-danger btn-sm" onclick="logout()">Logout</button>
-            <button class="btn btn-outline-primary mt-3" onclick="isiFormBaru()">+ Isi Pelanggan Baru</button>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-primary" onclick="isiFormBaru()">+ Isi Pelanggan Baru</button>
+            </div>
         </div>
     </div>
 
@@ -297,8 +302,6 @@
 
 <footer class="footer-main">
     <span>&copy; 2025 Pixel Playground Studio</span>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg" alt="Bendera Indonesia"
-         height="30">
 </footer>
 
 <!-- MODAL -->

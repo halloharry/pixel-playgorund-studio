@@ -81,24 +81,22 @@ function tampilkanBookingAktif() {
 window.addEventListener("DOMContentLoaded", tampilkanBookingAktif);
 
 function sembunyikanSemuaHalaman() {
-  const halaman = [
-    "halamanForm",
-    "halamanPeserta",
-    "halamanDashboard",
-    "halamanBooking"
-  ];
-  halaman.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.classList.add("d-none");
-  });
+    const halaman = [
+        "halamanForm",
+        "halamanPeserta",
+        "halamanDashboard",
+        "bookingCalendar"
+    ];
+
+    halaman.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add("d-none");
+    });
 }
 
 function tampilkanBooking() {
   sembunyikanSemuaHalaman();
   document.getElementById("bookingCalendar").classList.remove("d-none");
-  document.getElementById("halamanForm").classList.remove("d-none");
-  document.getElementById("halamanPeserta").classList.add("d-none");
-  document.getElementById("halamanDashboard").classList.add("d-none");
   tampilkanBookingAktif();
 }
 
