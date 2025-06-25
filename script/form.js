@@ -18,21 +18,40 @@ document.getElementById("penjualanForm")?.addEventListener("submit", function (e
     form.classList.add("d-none");
     document.getElementById("pesanBerhasil").classList.remove("d-none");
 
+    const layananText = data.get("entry.10482276") || "-";
+    const hargaText = data.get("entry.1500269990") || "";
+    const jumlahText = data.get("entry.1126059801") || "";
     const nama = data.get("entry.1506002396");
     const jenisLayanan = data.get("entry.1099535243");
     const noHp = data.get("entry.1099356212");
     const totalPembayaran = data.get("entry.1893531017");
 
-    if (noHp) {
-      const nomorWa = noHp.replace(/^0/, '62');
-      const pesan = `Halo Terimakasih ${nama}, Berikut adalah total pembayaran Rp. ${totalPembayaran},00.
-Telah berkunjung ke Pixel Playground Studio, semoga hasil foto ${jenisLayanan} suka. Datang kembali lagi ya Kak!`;
-      const waLink = `https://wa.me/${nomorWa}?text=${encodeURIComponent(pesan)}`;
-      document.getElementById("whatsappLink").href = waLink;
-      document.getElementById("whatsappLink").classList.remove("d-none");
-    } else {
-      document.getElementById("whatsappLink").classList.add("d-none");
-    }
+    // Hitung total diskon (optional, bisa ditaruh di hidden input juga kalau mau)
+    const hargaList = hargaText.split(",").map(h => parseInt(h));
+    const jumlahList = jumlahText.split(",").map(j => parseInt(j));
+    const totalBruto = hargaList.reduce((acc, h, i) => acc + (h * jumlahList[i]), 0);
+    const totalBayar = parseInt(totalPembayaran.replace(/\D/g, ''));
+    const totalDiskon = totalBruto - totalBayar;
+
+if (noHp) {
+  const nomorWa = noHp.replace(/^0/, '62');
+
+  const pesan = `🧾 Pixel Playground Studio
+=======================
+👤 Nama: ${nama}
+📸 ${layananText}
+🎁 Diskon: Rp ${totalDiskon.toLocaleString("id-ID")}
+💰 Total Bayar: Rp ${totalBayar.toLocaleString("id-ID")}
+=======================
+📍 Terima kasih, datang kembali ya Kak!`;
+
+  const waLink = `https://wa.me/${nomorWa}?text=${encodeURIComponent(pesan)}`;
+  document.getElementById("whatsappLink").href = waLink;
+  document.getElementById("whatsappLink").classList.remove("d-none");
+} else {
+  document.getElementById("whatsappLink").classList.add("d-none");
+}
+
 
   }).catch(() => {
     alert("Gagal mengirim. Coba lagi!");
