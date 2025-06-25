@@ -38,24 +38,56 @@ Telah berkunjung ke Pixel Playground Studio, semoga hasil foto ${jenisLayanan} s
     alert("Gagal mengirim. Coba lagi!");
   });
 });
-
 function validasiLayanan() {
   const semuaRow = document.querySelectorAll("#layananContainer .row");
   let valid = true;
+  let total = 0;
+  let semuaLayananText = [];
+  let jenisList = [];
+  let hargaList = [];
+  let jumlahList = [];
 
   for (const row of semuaRow) {
     const select = row.querySelector(".layananSelect");
-    const harga = row.querySelector(".hargaInput").value.replace(/\D/g, '');
+    const harga = parseInt(row.querySelector(".hargaInput").value.replace(/\D/g, '')) || 0;
     const jumlah = parseInt(row.querySelector(".jumlahInput").value);
+    const diskon = parseInt(row.querySelector(".diskonInput")?.value || "0");
 
-    if (!select.value || !harga || !jumlah || jumlah <= 0) {
+    if (!select.value || !harga || !jumlah || jumlah <= 0 || isNaN(diskon)) {
       valid = false;
       break;
     }
+
+    const hargaSetelahDiskon = harga - diskon;
+    const subtotal = hargaSetelahDiskon * jumlah;
+    total += subtotal;
+
+    semuaLayananText.push(`${select.value} (${jumlah}x @${harga - diskon})`);
+    jenisList.push(select.value);
+    hargaList.push(harga);
+    jumlahList.push(jumlah);
+  }
+
+  if (valid) {
+    const totalBruto = hargaList.reduce((acc, h, i) => acc + (h * jumlahList[i]), 0);
+    const totalDiskon = totalBruto - total;
+
+    document.getElementById("totalBayar").value = `Rp ${total.toLocaleString('id-ID')}`;
+
+    const diskonDisplay = document.getElementById("totalDiskon");
+    if (diskonDisplay) {
+      diskonDisplay.innerText = `Diskon Total: Rp ${totalDiskon.toLocaleString('id-ID')}`;
+    }
+
+    document.getElementById("semuaLayanan").value = semuaLayananText.join(", ");
+    document.querySelector(".hiddenJenisLayanan").value = jenisList.join(", ");
+    document.querySelector(".hiddenHarga").value = hargaList.join(", ");
+    document.querySelector(".hiddenJumlah").value = jumlahList.join(", ");
   }
 
   return valid;
 }
+
 
 function isiFormBaru() {
     // Sembunyikan pesan berhasil

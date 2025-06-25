@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const row = document.createElement("div");
     row.className = "row g-2 align-items-end mb-2";
     row.innerHTML = `
-      <div class="col-md-5">
+      <div class="col-md-3">
         <label class="form-label">Jenis Layanan</label>
         <select class="form-select layananSelect" data-index="${index}">
           <option value="">-- Pilih Layanan --</option>
@@ -30,13 +30,17 @@ document.addEventListener("DOMContentLoaded", () => {
           `).join("")}
         </select>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
         <label class="form-label">Harga</label>
         <input type="text" class="form-control hargaInput" readonly>
       </div>
       <div class="col-md-2">
         <label class="form-label">Jumlah</label>
         <input type="number" class="form-control jumlahInput" min="1" value="1">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Diskon</label>
+        <input type="number" class="form-control diskonInput" min="0" value="0">
       </div>
       <div class="col-md-2">
         <button type="button" class="btn btn-outline-danger btn-sm" onclick="this.closest('.row').remove(); hitungTotal()">🗑</button>
@@ -52,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const select = row.querySelector(".layananSelect");
     const hargaInput = row.querySelector(".hargaInput");
     const jumlahInput = row.querySelector(".jumlahInput");
+    const diskonInput = row.querySelector(".diskonInput");
 
     select.addEventListener("change", () => {
       const harga = parseInt(select.options[select.selectedIndex].getAttribute("data-harga")) || 0;
@@ -65,53 +70,70 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       hitungTotal();
     });
+
+    diskonInput.addEventListener("input", () => {
+      if (diskonInput.value.length > 6) {
+        diskonInput.value = diskonInput.value.slice(0, 6);
+      }
+      hitungTotal();
+    });
   }
 
   function hitungTotal() {
-   const semuaRow = document.querySelectorAll("#layananContainer .row");
+    const semuaRow = document.querySelectorAll("#layananContainer .row");
 
-     let total = 0;
-     let layananTambahanList = [];
+    let total = 0;
+    let bruto = 0;
+    let layananTambahanList = [];
 
-     semuaRow.forEach((row, index) => {
-       const harga = parseInt(row.querySelector(".hargaInput").value.replace(/\D/g, '')) || 0;
-       const jumlah = parseInt(row.querySelector(".jumlahInput").value) || 0;
-       total += harga * jumlah;
+    semuaRow.forEach((row, index) => {
+      const harga = parseInt(row.querySelector(".hargaInput").value.replace(/\D/g, '')) || 0;
+      const jumlah = parseInt(row.querySelector(".jumlahInput").value) || 0;
+      const diskon = parseInt(row.querySelector(".diskonInput")?.value || 0);
+      const hargaSetelahDiskon = Math.max(harga - diskon, 0);
 
-       if (index > 0) {
-         const jenis = row.querySelector(".layananSelect").value;
-         layananTambahanList.push(`${jenis} (Rp${harga.toLocaleString("id-ID")} x ${jumlah})`);
-       }
-     });
+      bruto += harga * jumlah;
+      total += hargaSetelahDiskon * jumlah;
 
-     document.getElementById("totalBayar").value = total.toLocaleString("id-ID");
-     const layananBersih = layananTambahanList.filter(item => item && item.trim() !== "");
-     document.getElementById("semuaLayanan").value = layananBersih.join(", ");
-     updateHiddenInputs()
-   }
+      if (index > 0) {
+        const jenis = row.querySelector(".layananSelect").value;
+        layananTambahanList.push(`${jenis} (Rp${hargaSetelahDiskon.toLocaleString("id-ID")} x ${jumlah})`);
+      }
+    });
 
-    function updateHiddenInputs() {
-      const semuaRow = document.querySelectorAll("#layananContainer .row");
-      if (semuaRow.length === 0) return;
+    document.getElementById("totalBayar").value = total.toLocaleString("id-ID");
+    const layananBersih = layananTambahanList.filter(item => item && item.trim() !== "");
+    document.getElementById("semuaLayanan").value = layananBersih.join(", ");
 
-      const rowPertama = semuaRow[0];
-
-      const select = rowPertama.querySelector(".layananSelect");
-      const hargaInput = rowPertama.querySelector(".hargaInput");
-      const jumlahInput = rowPertama.querySelector(".jumlahInput");
-
-      const hiddenJenis = document.querySelector(".hiddenJenisLayanan");
-      const hiddenHarga = document.querySelector(".hiddenHarga");
-      const hiddenJumlah = document.querySelector(".hiddenJumlah");
-
-      const jenis = (select?.value || "").trim();
-      const harga = (hargaInput?.value.replace(/\D/g, '') || "").trim();
-      const jumlah = (jumlahInput?.value || "").trim();
-
-      hiddenJenis.value = jenis;
-      hiddenHarga.value = harga;
-      hiddenJumlah.value = jumlah;
+    const diskonDisplay = document.getElementById("totalDiskon");
+    if (diskonDisplay) {
+      const totalDiskon = bruto - total;
+      diskonDisplay.innerText = `Diskon Total: Rp ${totalDiskon.toLocaleString("id-ID")}`;
     }
 
+    updateHiddenInputs();
+  }
 
+  function updateHiddenInputs() {
+    const semuaRow = document.querySelectorAll("#layananContainer .row");
+    if (semuaRow.length === 0) return;
+
+    const rowPertama = semuaRow[0];
+
+    const select = rowPertama.querySelector(".layananSelect");
+    const hargaInput = rowPertama.querySelector(".hargaInput");
+    const jumlahInput = rowPertama.querySelector(".jumlahInput");
+
+    const hiddenJenis = document.querySelector(".hiddenJenisLayanan");
+    const hiddenHarga = document.querySelector(".hiddenHarga");
+    const hiddenJumlah = document.querySelector(".hiddenJumlah");
+
+    const jenis = (select?.value || "").trim();
+    const harga = (hargaInput?.value.replace(/\D/g, '') || "").trim();
+    const jumlah = (jumlahInput?.value || "").trim();
+
+    hiddenJenis.value = jenis;
+    hiddenHarga.value = harga;
+    hiddenJumlah.value = jumlah;
+  }
 });
